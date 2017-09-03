@@ -1,0 +1,21 @@
+{
+  "name": "acme-offices",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "morgan": "^1.8.2",
+    "path": "^0.12.7",
+    "pg": "^7.2.0",
+    "sequelize": "^4.8.0",
+    "swig": "^1.4.2"
+  }
+}
