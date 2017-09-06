@@ -1,0 +1,24 @@
+
+{% extends './layout.html' %}
+{% block content %}
+<div class='row'>
+  <div class='col-sm-6'>
+    {% include './_users.html' %}
+  </div>
+  <div class='col-sm-6'>
+    {% include './_offices.html' %}
+  </div>
+</div>
+<script>
+  {% autoescape %}
+    var users = {{ users | json }}
+    var offices = {{ offices | json }}
+  {% endautoescape %}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='/source/UserForm.js'></script>
+<script src='/source/OfficeForm.js'></script>
+<script src='/source/UserList.js'></script>
+<script src='/source/app.js'></script>
+{% endblock %}
