@@ -15,7 +15,7 @@
     var offices = {{ offices | json }}
   {% endautoescape %}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_API_KEY&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=ENV['GOOGLE_API_KEY']&libraries=places"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src='/source/UserForm.js'></script>
 <script src='/source/OfficeForm.js'></script>
