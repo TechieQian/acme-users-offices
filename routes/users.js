@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const { User, Office } = require('../db/index').models
 
-
 router.get('/', (req,res,next)=> {
   User.findAll({
     order: [ 'id' ],
@@ -12,25 +11,17 @@ router.get('/', (req,res,next)=> {
     })
 })
 
-
 router.put('/:id', (req,res,next)=> {
-  console.log('id is', req.body)
   User.findById(req.params.id)
   .then((user)=> {
     if (req.body.officeId) {
-      console.log('setting')
       user.setOffice(req.body.officeId)
     }
     else {
-      console.log(user)
-      console.log('removing')
       user.setOffice(null)
     }
     res.send()
   })
-  // User.update({officeId : 0}, {
-  //   where : { id : req.params.id * 1 }
-  // })
 })
 
 router.post('/', (req,res,next)=> {

@@ -11,7 +11,6 @@ router.get('/', (req,res,next)=> {
     })
 })
 
-
 router.post('/', (req,res,next)=> {
   Office.create(req.body)
     .then((offices)=>{
@@ -20,7 +19,6 @@ router.post('/', (req,res,next)=> {
 })
 
 router.delete('/:id', (req,res,next)=> {
-  console.log('hitting delete route')
   Office.destroy({ where : { id : req.params.id }})
     .then(()=> {
       res.send()

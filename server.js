@@ -12,8 +12,8 @@ app.listen(port, ()=> {
   db.sync({force : true})
   .then(()=> {
     db.seed()
+    console.log(`love angela`)
   })
-  console.log(`Listening on ${port}`)
 })
 
 app.set('view engine', 'html')

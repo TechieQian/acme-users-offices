@@ -5,10 +5,10 @@ const db = require('./conn')
 const sync = ()=> { return db.sync({ force : true})}
 
 const seed = ()=> {
-  return Office.create({name : "oz", lat : 0 , lng : 0})
+  return Office.create({name : "IBM", lat : 0 , lng : 0})
   .then((o1)=> {
     return Promise.all([
-      User.create({ name : "annie"}),
+      User.create({ name : "angela"}),
       User.create({ name : "bob", officeId : o1.id})
     ])
   })
