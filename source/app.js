@@ -5,22 +5,29 @@ $.get('/', ()=> {
 })
 
 var initMap = function() {
-  // google.maps.event.addDomListener(window, 'load', ()=>{
-  //   console.log('running maps')
   var input = document.getElementById('googleSearch');
   var autocomplete = new google.maps.places.Autocomplete(input);
-  // });
   return autocomplete
 }
 
+
 var removeUser = function(id) {
-  console.log('removing user id', id)
   $.ajax({
     type : "DELETE",
     url : `/users/${id}`
   })
   .then(()=> {
-    console.log('finished deleting')
+    renderUser()
+  })
+}
+
+var removeOffice = function(id) {
+  $.ajax({
+    type : "DELETE",
+    url : `/offices/${id}`
+  })
+  .then(()=> {
+    renderOffice()
     renderUser()
   })
 }
@@ -34,6 +41,7 @@ var updateUser = function(userId, officeId) {
   })
   .then(()=> {
     console.log('update success')
+    renderOffice()
     renderUser()
   })
 }
@@ -48,7 +56,8 @@ function renderOffice() {
     let config = {
       id : '#officeList',
       offices : offices,
-      loc : map
+      loc : map,
+      removeOffice
     }
     console.log(typeof OfficeForm)
     OfficeForm(config)

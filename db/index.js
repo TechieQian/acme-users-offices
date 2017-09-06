@@ -14,7 +14,6 @@ const seed = ()=> {
   })
 }
 
-
 User.belongsTo(Office)
 Office.hasMany(User)
 

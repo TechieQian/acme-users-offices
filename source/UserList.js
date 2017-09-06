@@ -14,7 +14,7 @@ function UserList(config) {
                     `;
                   }
                 })
-    hasOffice.unshift('<option> -- none </option>')
+    hasOffice.unshift('<option value="0"> -- none -- </option>')
 
     const html1 = ` <li class='list-group-item' value='${user.id}'>
             ${user.name}
@@ -49,7 +49,9 @@ function UserList(config) {
 
   $(container).find('select').change(function() {
     let snode = $(this).closest('li')[0]
-    config.updateUser(snode.value, $(this).val())
+    const myVal = $(this).val()
+    const value = myVal == "0" ? null : myVal
+    config.updateUser(snode.value, value)
   });
 
 

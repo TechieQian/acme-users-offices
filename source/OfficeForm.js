@@ -1,12 +1,15 @@
 function OfficeForm(config) {
   const container = config.id
 
-
   var lis = config.offices.map(function(office, index){
+
     return `<li class="list-group-item">
       ${office.name} <br>
       lat : ${office.lat} <br>
       lng : ${office.lng} <br>
+      <label class='label label-default'>${office.users.length} user</label>
+      <button data-id=${office.id} class="btn btn-warning pull-right">delete</button>
+      <br clear="both"/>
       </li>`
   })
 
@@ -21,13 +24,7 @@ function OfficeForm(config) {
   config.loc.addListener('place_changed', function() {
     var place = config.loc.getPlace();
 
-    if (!place.geometry) {
-      // User entered the name of a Place that was not suggested and
-      // pressed the Enter key, or the Place Details request failed.
-      window.alert("No details available for input: '" + place.name + "'");
-      return;
-    }
-    else {
+    if (place.geometry) {
       let obj = {
         name : place.formatted_address,
         lat : place.geometry.location.lat(),
@@ -35,12 +32,15 @@ function OfficeForm(config) {
       }
       $.post('/offices', obj)
       .then(()=> {
-        console.log('add place complete')
         renderOffice()
         renderUser()
       })
-
     }
+  })
+
+  $(container).on('click', 'button', function() {
+    console.log('im clicked')
+    config.removeOffice($(this).data('id'))
   })
 
 
