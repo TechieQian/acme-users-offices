@@ -1,5 +1,4 @@
 $.get('/', ()=> {
-  console.log('rendering whole view')
   renderUser()
   renderOffice()
 })
@@ -10,13 +9,13 @@ var initMap = function() {
   return autocomplete
 }
 
-
 var removeUser = function(id) {
   $.ajax({
     type : "DELETE",
     url : `/users/${id}`
   })
   .then(()=> {
+    renderOffice()
     renderUser()
   })
 }
@@ -33,14 +32,12 @@ var removeOffice = function(id) {
 }
 
 var updateUser = function(userId, officeId) {
-  console.log('updating', userId, officeId)
   $.ajax({
     type : "PUT",
     url : `/users/${userId}`,
     data : { officeId : officeId }
   })
   .then(()=> {
-    console.log('update success')
     renderOffice()
     renderUser()
   })
@@ -59,7 +56,6 @@ function renderOffice() {
       loc : map,
       removeOffice
     }
-    console.log(typeof OfficeForm)
     OfficeForm(config)
   })
 }

@@ -1,5 +1,4 @@
 function UserList(config) {
-  console.log('rendering userlist')
   const container = config.id
 
   var lis = config.users.map(function(user, index){
@@ -39,7 +38,6 @@ function UserList(config) {
 
   //User list
   $(container).empty();
-  console.log(template)
   $(container).append(template)
 
   $(container).on('click', 'button', function() {
