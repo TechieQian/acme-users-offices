@@ -3,31 +3,31 @@ function UserList(config) {
 
   var lis = config.users.map(function(user, index){
 
-    const hasOffice =  config.offices.map(function(office, index){
-                  if (user.office && office.id == user.office.id) {
-                    return `<option selected="selected" value='${office.id}'> ${office.name} </option>`
-                  }
-                  else {
-                    return `
-                      <option value='${office.id}'> ${office.name} </option>
-                    `;
-                  }
-                })
-    hasOffice.unshift('<option value="0"> -- none -- </option>')
+    const optionList =
+      config.offices.map(function(office, index){
+        if (user.office && office.id == user.office.id) {
+          return `<option selected="selected" value='${office.id}'> ${office.name} </option>`
+        }
+        else {
+          return `<option value='${office.id}'> ${office.name} </option>`;
+        }
+      }).join('')
 
-    const html1 = ` <li class='list-group-item' value='${user.id}'>
-            ${user.name}
-            <select class='form-control'>`
+    const noneOption = '<option value="0"> -- none -- </option>'
 
-    const html2 = `</select>
+    const html = `
+      <li class='list-group-item' value='${user.id}'>
+        ${user.name}
+      <select class='form-control'>
+      ${noneOption} ${optionList}
+      </select>
       <br>
       <div class='form-group'>
         <button class='btn btn-warning'>Remove</button>
       </div>
-    </li>`
-
-    const whole = html1 + hasOffice.join('') + html2
-    return  whole
+    </li>
+    `
+    return html
   });
 
   var template = `
@@ -36,7 +36,6 @@ function UserList(config) {
   </ul>
   `;
 
-  //User list
   $(container).empty();
   $(container).append(template)
 

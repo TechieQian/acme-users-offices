@@ -16,6 +16,7 @@ router.post('/', (req,res,next)=> {
     .then((offices)=>{
       res.send(offices)
     })
+    .catch(next)
 })
 
 router.delete('/:id', (req,res,next)=> {

@@ -12,7 +12,6 @@ app.listen(port, ()=> {
   db.sync({force : true})
   .then(()=> {
     db.seed()
-    console.log(`love angela`)
   })
 })
 
@@ -28,7 +27,6 @@ app.use(require('morgan')('dev'))
 app.use(require('method-override')('_method'))
 app.use('/offices',require('./routes/offices'))
 app.use('/users',require('./routes/users'))
-
 
 app.get('/', (req, res, next)=> {
   Promise.all([

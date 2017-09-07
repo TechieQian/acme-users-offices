@@ -1,66 +1,59 @@
 $.get('/', ()=> {
-  renderUser()
-  renderOffice()
+  renderLists()
+
+  //Render OfficeForm.
+  const input = document.getElementById('googleSearch');
+  const autocomplete = new google.maps.places.Autocomplete(input);
+  OfficeForm( { loc : autocomplete })
 })
 
-var initMap = function() {
-  var input = document.getElementById('googleSearch');
-  var autocomplete = new google.maps.places.Autocomplete(input);
-  return autocomplete
-}
-
-var removeUser = function(id) {
+const removeUser = function(id) {
   $.ajax({
     type : "DELETE",
     url : `/users/${id}`
   })
   .then(()=> {
-    renderOffice()
-    renderUser()
+    renderLists()
   })
 }
 
-var removeOffice = function(id) {
+const removeOffice = function(id) {
   $.ajax({
     type : "DELETE",
     url : `/offices/${id}`
   })
   .then(()=> {
-    renderOffice()
-    renderUser()
+    renderLists()
   })
 }
 
-var updateUser = function(userId, officeId) {
+const updateUser = function(userId, officeId) {
   $.ajax({
     type : "PUT",
     url : `/users/${userId}`,
     data : { officeId : officeId }
   })
   .then(()=> {
-    renderOffice()
-    renderUser()
+    renderLists()
   })
 }
 
-function renderOffice() {
+const renderOfficeList = function() {
   $.ajax({
     type : "GET",
     url : '/offices'
   })
   .then((offices)=> {
-    let map = initMap()
     let config = {
       id : '#officeList',
       offices : offices,
-      loc : map,
       removeOffice
     }
-    OfficeForm(config)
+    OfficeList(config)
   })
 }
 
-function renderUser() {
+const renderUserList = function() {
   $.when (
     $.ajax({
       type : "GET",
@@ -81,4 +74,9 @@ function renderUser() {
     }
     UserList(config)
   })
+}
+
+function renderLists() {
+  renderUserList()
+  renderOfficeList()
 }
